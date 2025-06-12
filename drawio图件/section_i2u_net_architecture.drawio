@@ -1,0 +1,282 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0" version="26.2.15">
+  <diagram id="section_i2u_net_architecture" name="Section I2U-Net网络架构图">
+    <mxGraphModel dx="2520" dy="941" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="main_title" value="改进的Section I2U-Net网络架构详细说明" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="200" y="30" width="420" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="适用于任意尺寸输入的地震剖面数据分类网络" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="200" y="60" width="420" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="input" value="输入图像&#xa;(1×H×W)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;strokeWidth=3;" parent="1" vertex="1">
+          <mxGeometry x="40" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="output" value="分类输出&#xa;(C×H×W)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;strokeWidth=3;" parent="1" vertex="1">
+          <mxGeometry x="660" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="encoder_title" value="编码器路径" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="200" y="130" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="encoder_block" value="ResNet34编码器&#xa;(自适应单通道输入)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=12;strokeWidth=3;" parent="1" vertex="1">
+          <mxGeometry x="200" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="feature_extraction" value="特征提取模块&#xa;(多层特征提取)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;strokeWidth=3;" parent="1" vertex="1">
+          <mxGeometry x="360" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="decoder_title" value="解码器路径" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="520" y="130" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="decoder_block" value="改进MFII解码器&#xa;(任意尺寸适配)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;strokeWidth=3;" parent="1" vertex="1">
+          <mxGeometry x="520" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nonlocal_block" value="增强型非局部SPP&#xa;Inception模块(HIFA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=12;strokeWidth=3;" parent="1" vertex="1">
+          <mxGeometry x="360" y="305" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adaptive_pool" value="自适应池化模块&#xa;(AdaptiveMaxPool2d)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontStyle=1;fontSize=12;strokeWidth=3;" parent="1" vertex="1">
+          <mxGeometry x="200" y="305" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="interpolation" value="尺寸自适应插值&#xa;(双线性插值)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontStyle=1;fontSize=12;strokeWidth=3;" parent="1" vertex="1">
+          <mxGeometry x="520" y="305" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" source="input" target="encoder_block" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="420" as="sourcePoint" />
+            <mxPoint x="440" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow2" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" source="encoder_block" target="feature_extraction" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="420" as="sourcePoint" />
+            <mxPoint x="440" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow3" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" source="feature_extraction" target="nonlocal_block" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="420" as="sourcePoint" />
+            <mxPoint x="440" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow4" value="" style="endArrow=classic;html=1;rounded=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="420" y="289" as="sourcePoint" />
+            <mxPoint x="419.8" y="239" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow5" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" source="feature_extraction" target="decoder_block" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="420" as="sourcePoint" />
+            <mxPoint x="440" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow6" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" source="decoder_block" target="output" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="420" as="sourcePoint" />
+            <mxPoint x="440" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="skip_connection" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" source="encoder_block" target="decoder_block" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="420" as="sourcePoint" />
+            <mxPoint x="440" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="290" y="260" />
+              <mxPoint x="550" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="skip_text" value="跳跃 连接" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="390" y="261" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow7" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" source="adaptive_pool" target="nonlocal_block" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="435" as="sourcePoint" />
+            <mxPoint x="440" y="385" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow8" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" source="nonlocal_block" target="interpolation" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="435" as="sourcePoint" />
+            <mxPoint x="440" y="385" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow9" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="259" y="305" as="sourcePoint" />
+            <mxPoint x="259" y="240" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="259" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow10" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="305" as="sourcePoint" />
+            <mxPoint x="580" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="module_details" value="模块详情" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=14;strokeWidth=3;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+          <mxGeometry x="160" y="580" width="520" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="module1" value="1. SPP Inception - 使用自适应池化替代固定步长池化，处理任意尺寸特征图" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="module_details" vertex="1">
+          <mxGeometry y="30" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="module2" value="2. NonLocal_spp_inception - 结合自适应SPP与非局部机制，增强空间上下文提取" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="module_details" vertex="1">
+          <mxGeometry y="60" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="module3" value="3. MFII_DecoderBlock - 解码器块增加尺寸检查，确保特征图之间正确融合" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="module_details" vertex="1">
+          <mxGeometry y="90" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="module4" value="4. ECA - 高效通道注意力机制，在解码器中使用以增强重要特征" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="module_details" vertex="1">
+          <mxGeometry y="120" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="module5" value="5. ResNet34主干 - 适配单通道输入，提取多层次特征" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="module_details" vertex="1">
+          <mxGeometry y="150" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="module6" value="6. HIFA模块 - 为每个编码器阶段添加非局部特征增强" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="module_details" vertex="1">
+          <mxGeometry y="180" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="module7" value="7. 双线性插值 - 用于解决特征图尺寸不匹配问题，保证高质量特征融合" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="module_details" vertex="1">
+          <mxGeometry y="210" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="module8" value="8. 最终尺寸调整 - 确保输出与原始输入同等尺寸，适合地震剖面分析" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="module_details" vertex="1">
+          <mxGeometry y="240" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="comparison_title" value="与I2U-Net的关键改进" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="160" y="870" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="comparison" value="区别对比" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=14;strokeWidth=3;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+          <mxGeometry x="160" y="910" width="520" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="comp1" value="1. I2U-Net：使用固定步长的池化层 → Section I2U-Net：使用自适应池化层" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="comparison" vertex="1">
+          <mxGeometry y="30" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="comp3" value="2. I2U-Net：适用于固定尺寸输入 → Section I2U-Net：适用于任意尺寸输入" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontStyle=1;fontSize=12;" parent="comparison" vertex="1">
+          <mxGeometry y="60" width="520" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-3" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint y="209.5" as="sourcePoint" />
+            <mxPoint x="40" y="209.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-4" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="780" y="209.5" as="sourcePoint" />
+            <mxPoint x="820" y="209.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-5" value="输入图像&#xa;(1×H×W)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-500" y="228" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-6" value="分类输出&#xa;(C×H×W)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="228" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-7" value="ResNet34编码器&lt;div&gt;(自适应单通道输入)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=12;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-500" y="349" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-8" value="特征提取模块&lt;div&gt;（多层特征提取）&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-340" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-9" value="改进MFII解码器&lt;br&gt;(任意尺寸适配)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="349" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-10" value="增强型非局部SPP&lt;br&gt;Inception模块(HIFA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=12;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-340" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-11" value="" style="endArrow=classic;html=1;rounded=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" source="w4gRPloxR8Hkajw-PfgX-5" target="w4gRPloxR8Hkajw-PfgX-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-440" y="290" as="sourcePoint" />
+            <mxPoint x="-260" y="479" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-12" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" source="w4gRPloxR8Hkajw-PfgX-7" target="w4gRPloxR8Hkajw-PfgX-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-310" y="529" as="sourcePoint" />
+            <mxPoint x="-260" y="479" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-440" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-13" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" source="w4gRPloxR8Hkajw-PfgX-8" target="w4gRPloxR8Hkajw-PfgX-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-310" y="600" as="sourcePoint" />
+            <mxPoint x="-260" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-14" value="" style="endArrow=classic;html=1;rounded=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" target="w4gRPloxR8Hkajw-PfgX-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-280" y="510" as="sourcePoint" />
+            <mxPoint x="-260" y="550" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-280" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-15" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" source="w4gRPloxR8Hkajw-PfgX-8" target="w4gRPloxR8Hkajw-PfgX-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-310" y="529" as="sourcePoint" />
+            <mxPoint x="-260" y="479" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-120" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-16" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" source="w4gRPloxR8Hkajw-PfgX-9" target="w4gRPloxR8Hkajw-PfgX-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-310" y="529" as="sourcePoint" />
+            <mxPoint x="-260" y="479" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-17" value="跳跃连接" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="-310" y="346" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-18" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" source="w4gRPloxR8Hkajw-PfgX-7" target="w4gRPloxR8Hkajw-PfgX-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-300" y="391" as="sourcePoint" />
+            <mxPoint x="-300" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-19" value="编码器路径" style="text;html=1;strokeColor=#6F0000;fillColor=#a20025;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontStyle=1;fontSize=14;labelBackgroundColor=none;labelBorderColor=none;textShadow=0;fontColor=#ffffff;glass=0;shadow=0;dashed=1;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-500" y="180" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-20" value="解码器路径" style="text;html=1;strokeColor=#6F0000;fillColor=#a20025;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontStyle=1;fontSize=14;labelBackgroundColor=none;labelBorderColor=none;textShadow=0;fontColor=#ffffff;glass=0;shadow=0;dashed=1;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="180" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-21" value="自适应池化模块&#xa;(AdaptiveMaxPool2d)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontStyle=1;fontSize=12;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-500" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-22" value="尺寸自适应插值&#xa;(双线性插值)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;fontStyle=1;fontSize=12;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-24" value="" style="endArrow=classic;html=1;rounded=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" target="w4gRPloxR8Hkajw-PfgX-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-440.5" y="409" as="sourcePoint" />
+            <mxPoint x="-440.5" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-26" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1" source="w4gRPloxR8Hkajw-PfgX-22">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-120.5" y="470" as="sourcePoint" />
+            <mxPoint x="-120.5" y="409" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-28" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-380" y="549.5" as="sourcePoint" />
+            <mxPoint x="-340" y="549.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4gRPloxR8Hkajw-PfgX-29" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;jumpStyle=arc;jumpSize=6;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-220" y="549.5" as="sourcePoint" />
+            <mxPoint x="-180" y="549.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
